@@ -10,17 +10,14 @@
     <title>Document</title>
 </head>
 <body>
-<h1>POSTS</h1>
-<a href="/posts/create">DODAJ POSTA</a>
-@foreach($posts as $post)
-    <div>
-        <div>{{\Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}</div>
-        <div>{{\Carbon\Carbon::parse($post->created_at)->format('H:i')}}</div>
-        <a href="/posts/{{$post->id}}">{{$post->title}}</a>
-        <div>{{$post->post}}</div>
-    </div>
-@endforeach
+
+<div>{{\Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}</div>
+<div>{{\Carbon\Carbon::parse($post->created_at)->format('H:i')}}</div>
+<div>{{$post->title}}</div>
+<div>{{$post->post}}</div>
+<a href="/posts/{{$post->id}}/edit">EDIT</a>
 </body>
 </html>
+
 
 @endsection
