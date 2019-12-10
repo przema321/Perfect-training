@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\User;
 use App\Message;
+use Illuminate\Support\Facades\DB;
+use Pusher\Pusher;
 class MessengerController extends Controller
 {
     /**
@@ -14,8 +16,16 @@ class MessengerController extends Controller
      */
     public function index()
     {
-        $users = User::where('id',"!=",Auth::id())->get();
-        return view('messenger.index', compact("users"));
+        // select all users except logged in user
+        //$users = User::where('id', '!=', Auth::id())->get();
+
+        // count how many message are unread from the selected user
+        $users = DB::select("select users.id, users.name, users.avatar, users.email, count(is_read) as unread 
+        from users LEFT  JOIN  messages ON users.id = messages.from and is_read = 0 and messages.to = " . Auth::id() . "
+        where users.id != " . Auth::id() . " 
+        group by users.id, users.name, users.avatar, users.email");
+
+        return view('messenger.index', ['users' => $users]);
     }
 
 
