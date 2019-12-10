@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::post('message', 'MessengerController@sendMessage');
+Route::get('message/{id}', 'MessengerController@getMessage')->name('message');
+Route::get('/messenger','MessengerController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/posts',"PostController@index");
 Route::group(['middleware' => ['owner']], function () {

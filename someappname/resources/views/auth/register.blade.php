@@ -61,6 +61,23 @@
                                 </div>
                             </div>
                             <div class="form-group row">
+                                <label for="birth_date"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('avatar') }}</label>
+
+                                <div class="col-md-6">
+                                    <input id="avatar" type="text"
+                                           class="form-control @error('avatar') is-invalid @enderror"
+                                           name="avatar" value="{{ old('avatar') }}" required
+                                           autocomplete="avatar" autofocus>
+
+                                    @error('birth_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="form-group row">
                                 <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
                                 <div class="col-md-6">
                                     <select name="sex">
