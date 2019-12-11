@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -11,7 +13,8 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return view('auth.users', compact('users'));
+
+       return view('auth.users', compact('users'));
     }
 
     public function show(User $user)
@@ -30,7 +33,10 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('auth.edit', compact('user'));
+        if(Auth::user()->id===$user->id or !Auth::user() || Auth::user()->is_admin === 1) {
+            return view('auth.edit', compact('user'));
+        }else
+            abort(403, 'Unauthorized action.');
     }
 
     public function setPasswordAttribute($password)
@@ -40,9 +46,16 @@ class UserController extends Controller
         }
     }
 
+
+
     public function update($id, Request $request)
     {
-
+            request()->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'second_name'=>['required','string','max:255'],
+                'weight'=>['required', 'min:30','max:200','integer'],
+                'height'=>['required','max:230','integer'],
+            ]);
 
         {
             $user = User::findOrFail($id);
@@ -53,31 +66,33 @@ class UserController extends Controller
             } else {
                 $user->name = request('name');
                 $user->second_name = request('second_name');
-                $user->birth_date = request('birth_date');
-                $user->email = request('email');
                 $user->password = bcrypt(request('password'));
-                $user->sex = request('sex');
+                request()->validate([
+                    'password'=>['min:8','confirmed','string','required']
+                ]);
                 $user->exp = request('exp');
                 $user->height = request('height');
                 $user->weight = request('weight');
                 $user->save();
 
+
             }
+
             return redirect('users');
         }
 
-//        $user->name = request('name');
-//        $user->second_name = request('second_name');
-//        $user->birth_date = request('birth_date');
-//        $user->email = request('email');
-//        $user->password = bcrypt(request('password'));
-//        $user->sex = request('sex');
-//        $user->exp = request('exp');
-//        $user->height = request('height');
-//        $user->weight = request('weight');
-//        $user->save();
-
-        return redirect('/users');
+////        $user->name = request('name');
+////        $user->second_name = request('second_name');
+////        $user->birth_date = request('birth_date');
+////        $user->email = request('email');
+////        $user->password = bcrypt(request('password'));
+////        $user->sex = request('sex');
+////        $user->exp = request('exp');
+////        $user->height = request('height');
+////        $user->weight = request('weight');
+////        $user->save();
+//
+//        return redirect('/users');
     }
 
 

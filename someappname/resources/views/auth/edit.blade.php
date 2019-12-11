@@ -43,36 +43,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="birth_date"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="birth_date" type="text"
-                                           class="form-control @error('birth_date') is-invalid @enderror"
-                                           name="birth_date" value="{{ $user->birth_date }}"  autofocus>
-
-                                    @error('birth_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
-                                <div class="col-md-6">
-                                    <select name="sex">
-                                        <option>male</option>
-                                        <option>female</option>
-                                    </select>
-                                    @error('sex')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="form-group row">
                                 <label for="exp" class="col-md-4 col-form-label text-md-right">{{ __('exp') }}</label>
 
                                 <div class="col-md-6">

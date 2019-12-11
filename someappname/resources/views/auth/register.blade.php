@@ -28,7 +28,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="second_name"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('second_name') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Surname') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="second_name" type="text"
@@ -48,10 +48,10 @@
                                        class="col-md-4 col-form-label text-md-right">{{ __('Birth Date') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="birth_date" type="text"
+                                    <input id="birth_date" type="date"
                                            class="form-control @error('birth_date') is-invalid @enderror"
                                            name="birth_date" value="{{ old('birth_date') }}" required
-                                           autocomplete="birth_date" autofocus>
+                                           autocomplete="birth_date" autofocus >
 
                                     @error('birth_date')
                                     <span class="invalid-feedback" role="alert">
@@ -60,23 +60,23 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label for="birth_date"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('avatar') }}</label>
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="birth_date"--}}
+{{--                                       class="col-md-4 col-form-label text-md-right">{{ __('avatar') }}</label>--}}
 
-                                <div class="col-md-6">
-                                    <input id="avatar" type="text"
-                                           class="form-control @error('avatar') is-invalid @enderror"
-                                           name="avatar" value="{{ old('avatar') }}" required
-                                           autocomplete="avatar" autofocus>
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="avatar" type="text"--}}
+{{--                                           class="form-control @error('avatar') is-invalid @enderror"--}}
+{{--                                           name="avatar" value="{{ old('avatar') }}"--}}
+{{--                                           autocomplete="avatar" autofocus>--}}
 
-                                    @error('birth_date')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
+{{--                                    @error('birth_date')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="form-group row">
                                 <label for="sex" class="col-md-4 col-form-label text-md-right">{{ __('Sex') }}</label>
                                 <div class="col-md-6">
@@ -126,7 +126,7 @@
 
                             <div class="form-group row">
                                 <label for="weight"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('weight') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('weight (kg)') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="weight" type="text"
@@ -142,7 +142,7 @@
                             </div>
                             <div class="form-group row">
                                 <label for="height"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('height') }}</label>
+                                       class="col-md-4 col-form-label text-md-right">{{ __('height (cm)') }}</label>
 
                                 <div class="col-md-6">
                                     <input id="height" type="text"
@@ -182,7 +182,6 @@
                                            name="password_confirmation" required autocomplete="new-password">
                                 </div>
                             </div>
-
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
@@ -196,4 +195,5 @@
             </div>
         </div>
     </div>
+
 @endsection

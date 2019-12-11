@@ -50,11 +50,14 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'second_name'=>['required','string','max:255'],
+            'birth_date'=>['required','date','before:01/01/2012'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-
-
+            'weight'=>['required', 'min:30','max:200','integer'],
+            'height'=>['required','max:230','integer']
             ]);
+
     }
 
     /**
