@@ -22,6 +22,10 @@ Route::get('message/{id}', 'MessengerController@getMessage')->name('message');
 Route::get('/messenger', 'MessengerController@index');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/users/{user}/edit', 'UserController@edit')->name('edit');
+Route::get('/plan/easy', 'PlansController@easy');
+Route::get('/plan/advanced', 'PlansController@advanced');
+Route::get('/plan/easy', 'PlansController@easy');
+Route::get('/plan/inter', 'PlansController@inter');
 
 Route::group(['middleware' => ['owner']], function () {
 

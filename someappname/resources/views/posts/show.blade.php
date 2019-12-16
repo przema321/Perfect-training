@@ -10,7 +10,7 @@
     <title>Document</title>
 </head>
 <body>
-
+{{dd($post)}}
 <div>{{\Carbon\Carbon::parse($post->created_at)->format('d/m/Y')}}</div>
 <div>{{\Carbon\Carbon::parse($post->created_at)->format('H:i')}}</div>
 <div>{{$post->title}}</div>

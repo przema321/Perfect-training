@@ -19,6 +19,27 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style>
+        html, body {
+            height: 100%;
+        }
+
+        #wrap {
+            min-height: 100%;
+        }
+
+        #main {
+            overflow: auto;
+            padding-bottom: 150px; /* this needs to be bigger than footer height*/
+        }
+
+        .footer {
+            position: relative;
+            margin-top: -150px; /* negative value of footer height */
+            height: 150px;
+            clear: both;
+            padding-top: 20px;
+        }
+
         /* width */
         ::-webkit-scrollbar {
             width: 7px;
@@ -55,6 +76,8 @@
 
         .user-wrapper {
             height: 600px;
+            background-color: #F39A03;
+            border-radius:20px;
         }
 
         .user {
@@ -64,7 +87,7 @@
         }
 
         .user:hover {
-            background: #eeeeee;
+            background: grey;
         }
 
         .user:last-child {
@@ -102,7 +125,8 @@
         .message-wrapper {
             padding: 10px;
             height: 536px;
-            background: #eeeeee;
+            background: #F39A03;
+            border-radius: 20px;
         }
 
         .messages .message {
@@ -124,7 +148,7 @@
         }
 
         .sent {
-            background: #3bebff;
+            background: lightblue;
             float: right;
             text-align: right;
         }
@@ -139,7 +163,7 @@
         }
 
         .active {
-            background: #eeeeee;
+            background: grey;
         }
 
         input[type=text] {
@@ -147,24 +171,30 @@
             padding: 12px 20px;
             margin: 15px 0 0 0;
             display: inline-block;
-            border-radius: 4px;
+            border-radius: 5px;
             box-sizing: border-box;
             outline: none;
             border: 1px solid #cccccc;
+            background-color: #ffffff;
+
         }
 
         input[type=text]:focus {
             border: 1px solid #aaaaaa;
+
         }
+
     </style>
 </head>
 <body>
 <div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-light pt-4">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
+            <a href="{{ url('/') }}">
+                <img src="{{ URL::to('/') }}/images/logo_appki.png" width="150px" height="70px"/>
             </a>
+
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
@@ -180,16 +210,29 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
+
+
+                    <li class="nav-item dropdown">
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
+
                         @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
+
                         @endif
                     @else
+                        <li class="nav-item nav-link">
+
+                            @if(Auth::user()->exp==='easy')
+                                <a style="text-decoration: none; color: inherit " href="/plan/easy">Training Plan</a>
+                            @elseif(Auth::user()->exp==='mid')
+                                <a style="text-decoration: none; color: inherit " href="/plan/inter">Training Plan</a>
+                            @else
+                                <a style="text-decoration: none; color: inherit " href="/plan/advanced">Training
+                                    Plan</a>
+                            @endif
+
+                        </li>
+                        <li class="nav-item nav-link"><a style="text-decoration: none; color: inherit"
+                                                         href="/messenger">Chat</a></li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -203,18 +246,24 @@
                                     {{ __('Logout') }}
                                 </a>
 
+
                                 <a class="dropdown-item" href="/users/{{Auth::user()->id}}/edit">
 
                                     {{ __('Edit Profile') }}
                                 </a>
+                                @if(Auth::user()->is_admin === 1)
+                                    <a class="dropdown-item" href="/users">User Management</a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                @endif
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                       style="display: none;">
                                     @csrf
                                 </form>
                             </div>
                         </li>
                     @endguest
+
                 </ul>
             </div>
         </div>
@@ -319,7 +368,17 @@
         }, 50);
     }
 </script>
-<script src="/js/moment.min.js"></script>
-<script src="/js/bootstrap-datetimepicker.min.js"></script>
+<!-- Footer -->
+<footer class="page-footer font-small blue" style="margin-bottom: 30px; margin-top: 30px">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2018 Copyright:
+        <a href="/">Perfect Training</a>
+    </div>
+    <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
+
 </html>

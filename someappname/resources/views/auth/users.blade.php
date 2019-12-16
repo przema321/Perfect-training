@@ -11,18 +11,29 @@
     <title>Document</title>
 </head>
 <body>
-<h1>Users</h1>
-@foreach($users as $user)
-    <ul>
-    <a href="/users/{{$user->id}}">
-        @if($user->is_admin == 0)
-            {{$user->name}}
 
-        @endif
-    </a>
-    </ul>
-@endforeach
+<div class="container">
+    <div class="content">
+        <div class="card" style="padding-top: 150px">
+            <div class="card-body pt-4 pb-4">
+                <h3 class="text-center">Users to edit</h3>
+                @foreach($users as $user)
+                    <ul class="text-center">
+                        <a href="/users/{{$user->id}}">
+                            @if($user->is_admin == 0)
+                                {{$user->name}}
+
+                            @endif
+                        </a>
+                    </ul>
+                @endforeach
+            </div>
+        </div>
+
+    </div>
+</div>
 </body>
+
 </html>
 
 

@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -25,9 +25,10 @@ class HomeController extends Controller
 
 
         public function index(){
-
+        $posts = Post::all();
         $users = \Auth::user();
-        return view('home', compact('users'));
+        return view('home', compact('users', 'posts'));
+
 
 
     }

@@ -12,35 +12,42 @@
     <!-- Styles -->
     <style>
         html, body {
-            background-color: #fff;
+            background-color: lightgray;
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
             height: 100vh;
             margin: 0;
         }
+
         .full-height {
             height: 100vh;
         }
+
         .flex-center {
             align-items: center;
             display: flex;
             justify-content: center;
         }
+
         .position-ref {
             position: relative;
         }
+
         .top-right {
             position: absolute;
             right: 10px;
             top: 18px;
         }
+
         .content {
             text-align: center;
         }
+
         .title {
             font-size: 84px;
         }
+
         .links > a {
             color: #636b6f;
             padding: 0 25px;
@@ -50,43 +57,59 @@
             text-decoration: none;
             text-transform: uppercase;
         }
+
         .m-b-md {
             margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            font-weight: 600;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            text-decoration: none;
+            font-size: 20px;
+
+        }
+
+        .btn-primary {
+            color: #434343;
+            background-color: #F6A500;
+            border-color: #F19100;
         }
     </style>
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
     <div class="content">
         <div class="title m-b-md">
-            Laravel
-        </div>
+            <img src="{{ URL::to('/') }}/images/logo_appki.png" width="400px" height="200px"/>
 
-        <div class="links">
-            <a href="/posts">Posts</a>
-            <a href="/messenger">Messenger</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://vapor.laravel.com">Vapor</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
         </div>
+        @if(Route::has('login'))
+            @auth
+            <div style="padding-top: 10px"><a href="/home" class="btn btn-primary">Home</a></div>
+            @else
+                <div style="padding-top: 10px"><a href="/login" class="btn btn-primary">Login</a></div>
+                @if(Route::has('register'))
+                <div style="padding-top: 20px"><a href="/register" class="btn btn-primary">Register</a></div>
+            @endif
+        @endauth
     </div>
+    @endif
 </div>
+
+
 </body>
 </html>
